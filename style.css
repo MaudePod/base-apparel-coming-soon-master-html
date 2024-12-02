@@ -1,0 +1,250 @@
+:root {
+    /*Primary*/
+    --desaturated-red: hsl(0, 36%, 70%);
+    --soft-red: hsl(0, 93%, 68%);
+    /*Neutral*/
+    --dark-grayish-red: hsl(0, 6%, 24%);
+}
+
+@font-face {
+    font-family: 'Josefin';
+    src: url(./fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
+}
+
+body {
+    min-height: 100svh;
+    width: 100svw;
+    container: body / inline-size;
+    margin: 0;
+    font-family: 'Josefin';
+    font-weight: 300;
+}
+
+main {
+    display: grid;
+    min-height: 100cqh;
+    width: 100cqw;
+    place-items: center;
+    container: main / inline-size;
+}
+
+section[class="card"] {
+    min-height: 100cqh;
+    width: 100cqw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: white;
+}
+
+section[class="card-text"] {
+    display: grid;
+    background: url(./images/bg-pattern-desktop.svg);
+    background-size: cover;
+    grid-template-rows: repeat(10, 10%);
+    grid-template-columns: repeat(10, 10%);
+}
+
+section[class="logo-container"] {
+    height: 50px;
+    width: 100px;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+section[class="logo-container"] svg {
+    width: 100%;
+    height: 100%;
+}
+
+section[class="card-image-container"],
+section[class="card-image-container"] img {
+    width: 100%;
+    height: 100%;
+}
+
+section[class="card-text"] h1 {
+    grid-row: 3;
+    grid-column: 2;
+    font-size: 3.5em;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: 600;
+    color: var(--dark-grayish-red);
+}
+
+section[class="card-text"] span {
+    color: var(--desaturated-red);
+}
+
+section[class="card-text"] p {
+    grid-row: 6;
+    grid-column: 2 / 9;
+    color: var(--desaturated-red);
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+form {
+    grid-row: 8;
+    grid-column: 2 / 9;
+    display: grid;
+    grid-template-columns: 70fr 30fr;
+    height: 50px;
+    position: relative;
+}
+
+input[id="email"] {
+    width: 100%;
+    border-radius: 30px;
+    background: transparent;
+    height: 50px;
+    border: 1px solid var(--desaturated-red);
+    padding-left: 15px;
+}
+
+input[id="email"]::placeholder {
+    color: var(--desaturated-red);
+}
+
+input[id="email"]:focus-visible {
+    border-color: var(--desaturated-red);
+    outline: transparent;
+}
+
+form:has(input[id="email"]:user-invalid) {
+    input[id="email"] {
+        border-color: var(--soft-red);
+    }
+
+    label[for="email"]::before {
+        content: url(./images/icon-error.svg);
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 15px;
+        right: 38%;
+    }
+
+    label[for="email"]::after {
+        content: 'Please enter a valid email';
+        color: var(--soft-red);
+        font-weight: 500;
+        margin-left: 15px;
+        position: absolute;
+    }
+}
+
+button[id="submit"] {
+    border-radius: 30px;
+    background: var(--desaturated-red);
+    border: 0;
+    outline-color: transparent;
+    display: grid;
+    place-items: center;
+    place-content: center;
+    height: 100%;
+    width: 100%;
+    transform: translateX(-40%);
+    background: linear-gradient(to right, var(--desaturated-red), var(--soft-red));
+    cursor: pointer;
+    box-shadow: 0px 5px 3px 0px var(--desaturated-red);
+}
+
+button[id="submit"]:hover {
+    filter: brightness(1.5);
+    background: var(--desaturated-red);
+}
+
+button svg {
+    height: 15px;
+    width: 15px;
+}
+
+section[class="mobile-logo-container"] {
+    display: none;
+}
+
+svg[id="svgs"] {
+    display: none;
+}
+@container (inline-size >= 1920px) {
+    section[class="card-text"] h1 {
+        font-size: 4.5em;
+    }
+    section[class="card-text"] p {
+        font-size: 2.2em;
+    }
+}
+@container (inline-size < 1000px) {
+    section[class="logo-container"] {
+        display: none;
+    }
+
+    section[class="mobile-logo-container"] {
+        display: grid;
+        margin-left: 1%;
+        height: 50px;
+    }
+
+    section[class="mobile-logo-container"] svg {
+        transform: scale(50%);
+        width: 300px;
+    }
+
+    section[class="card"] {
+        grid-template-columns: 1fr;
+    }
+
+    section[class="card-image-container"] {
+        order: 1;
+        height: 30cqh;
+    }
+
+    section[class="card-text"] {
+        order: 2;
+        text-align: center;
+    }
+
+    section[class="card-text"] h1 {
+        display: grid;
+        place-items: center;
+        grid-column: 4;
+        grid-row: 1;
+    }
+
+    section[class="card-text"] p {
+        grid-column: 2 / 10;
+    }
+
+    form {
+        grid-column: 2 / 11;
+        grid-template-columns: 80fr 20fr;
+    }
+
+    form:has(input[id="email"]:user-invalid) {
+        label[for="email"]::before {
+            right: 30%;
+        }
+    }
+
+    form:has(input[id="email"]:user-invalid) {
+        label[for="email"]::after {
+            left: 0;
+        }
+    }
+}
+@container (inline-size < 600px) {
+    section[class="card-text"] h1 {
+    font-size: 2.5em;
+    grid-column: 3;
+    }
+    section[class="card-text"] p {
+        grid-row: 5;
+    }
+    form {
+        grid-row: 9;
+    }
+    section[class="mobile-logo-container"] {
+        height: auto;
+    }
+}
